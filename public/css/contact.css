@@ -1,0 +1,193 @@
+/* ==========================================================================
+   Contact (full-bleed sections) + References + Home CTA — PaperMod-native
+   ========================================================================== */
+:root{
+  --ct-text:    var(--content, #111827);
+  --ct-muted:   var(--secondary, #6b7280);
+  --ct-border:  var(--border, #e5e7eb);
+  --ct-entry:   var(--entry, #ffffff);
+  --ct-primary: var(--primary, #0d6efd);
+  --ct-shadow:  rgba(0,0,0,.06);
+}
+
+/* ---------- Full-bleed section helpers ---------- */
+/* Stretch a block to viewport width even inside the content container */
+.ct-full{
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+  padding: 1.2rem 0;
+  border-top: 1px solid var(--ct-border);
+  background: transparent;
+}
+.ct-full:first-of-type{ border-top: 0; }
+
+.ct-container{
+  max-width: min(1100px, 92vw);
+  margin: 0 auto;
+  padding: 0 0.5rem;
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 1rem;
+}
+@media (max-width: 880px){ .ct-container{ grid-template-columns: 1fr; } }
+
+/* ---------- Cards / shared UI ---------- */
+.ct-card{
+  background:var(--ct-entry); border:1px solid var(--ct-border); border-radius:14px;
+  padding:1.2rem 1.2rem 1rem; box-shadow:0 10px 30px var(--ct-shadow);
+}
+.ct-title{ margin:0 0 .3rem; font-size:1.2rem; font-weight:800; color:var(--ct-text); }
+.ct-sub{ margin:.1rem 0 1rem; color:var(--ct-muted); }
+
+/* Buttons */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:.5rem; padding:.6rem 1rem; border-radius:12px; border:1px solid var(--ct-border);
+  font-weight:800; text-decoration:none; cursor:pointer; transition:.15s ease;
+}
+.btn-primary{ background:var(--ct-primary); color:#fff; border-color:transparent; }
+.btn-primary:hover{ filter:brightness(.95); transform:translateY(-1px); }
+.btn-ghost{ background:var(--ct-entry); color:var(--ct-text); }
+.btn-ghost:hover{ box-shadow:0 6px 14px var(--ct-shadow); transform:translateY(-1px); }
+
+/* ---------- Social list (no wrap, clean divider) ---------- */
+.ct-methods{ display:grid; gap:.2rem; margin:.4rem 0 .2rem; }
+.ct-row{
+  display:flex; gap:.6rem; align-items:center;
+  border-bottom:1px solid var(--ct-border); padding:.35rem 0 .6rem;
+}
+.ct-icon{
+  width:36px;height:36px;border-radius:9999px;display:grid;place-items:center;flex:0 0 36px;
+  background: radial-gradient(120% 120% at 30% 30%, #0ea5e9, #22c55e, #a855f7);
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.25), 0 2px 10px rgba(0,0,0,.12);
+}
+.ct-icon img.si{ width:70%;height:70%;filter:brightness(0) invert(1); }
+.ct-row a{
+  color:var(--ct-text); text-decoration:none; font-weight:800;
+  flex:1 1 auto; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.ct-row a:hover{ text-decoration:underline; text-underline-offset:3px; }
+
+/* ---------- Quick info bars (bottom section) ---------- */
+.ct-bot{ padding-top: .6rem; padding-bottom: 1.6rem; }
+.ct-bars{
+  display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 1rem;
+}
+@media (max-width: 1080px){ .ct-bars{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px){ .ct-bars{ grid-template-columns: 1fr; } }
+
+.ct-bar{
+  background: var(--ct-entry);
+  border: 1px solid var(--ct-border);
+  border-radius: 12px;
+  padding: .9rem 1rem;
+  box-shadow: 0 8px 24px var(--ct-shadow);
+  display:flex; align-items:center; gap:.6rem; min-height: 64px;
+}
+.ct-bar strong{ font-weight:900; color: var(--ct-text); min-width: 6.5rem; }
+.ct-bar span{ color: var(--ct-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ct-bar a{ color: var(--ct-text); font-weight: 800; text-decoration: none; }
+.ct-bar a:hover{ text-decoration: underline; }
+
+/* ---------- Polished form (floating labels) ---------- */
+.contact-form{ display:grid; gap:.8rem; margin-top:.2rem; }
+.contact-form .row{ display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+@media (max-width: 560px){ .contact-form .row{ grid-template-columns:1fr; } }
+
+.fg{ position:relative; }
+.fg input, .fg textarea{
+  width:100%; border:1px solid var(--ct-border); border-radius:12px; background:var(--ct-entry);
+  color:var(--ct-text); padding:1.05rem .9rem .85rem; font:inherit; transition:border-color .12s ease, box-shadow .12s ease;
+}
+.fg textarea{ resize:vertical; }
+.fg label{
+  position:absolute; left:.85rem; top:.82rem; background:var(--ct-entry);
+  padding:0 .25rem; color:var(--ct-muted); pointer-events:none; transition: transform .12s ease, color .12s ease, font-size .12s ease;
+}
+.fg input:focus, .fg textarea:focus{
+  outline:2px solid color-mix(in srgb, var(--ct-primary) 35%, transparent);
+  border-color: color-mix(in srgb, var(--ct-primary) 40%, var(--ct-border));
+  box-shadow:0 4px 16px var(--ct-shadow);
+}
+.fg input:focus + label, .fg input:not(:placeholder-shown) + label,
+.fg textarea:focus + label, .fg textarea:not(:placeholder-shown) + label{
+  transform: translateY(-.9rem); font-size:.8rem; color:var(--ct-primary);
+}
+
+/* Honeypot (hidden) */
+.hp{ position:absolute !important; left:-10000px !important; width:1px !important; height:1px !important; opacity:0 !important; }
+
+.form-note{ color:var(--ct-muted); font-size:.9rem; margin:.6rem 0 0; }
+
+/* ---------- References + Home hero (unchanged from before) ---------- */
+.ref-grid{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:1rem; }
+@media (max-width: 1080px){ .ref-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 720px){ .ref-grid{ grid-template-columns: 1fr; } }
+.ref-card{
+  background:var(--ct-entry); border:1px solid var(--ct-border); border-radius:12px;
+  padding:1rem 1.1rem; box-shadow:0 10px 30px var(--ct-shadow);
+  display:grid; gap:.4rem;
+}
+.ref-hd{ display:grid; gap:.15rem; }
+.ref-name{ font-weight:900; color:var(--ct-text); }
+.ref-role{ color:var(--ct-muted); font-weight:700; }
+.ref-body p{ margin:.25rem 0 .35rem; color:var(--ct-text); }
+.ref-meta{ display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; font-weight:700; }
+.ref-meta a{ color:var(--ct-text); text-decoration:none; }
+.ref-meta a:hover{ text-decoration:underline; }
+.ref-note{ margin-top:.6rem; color:var(--ct-muted); }
+
+.home-hero{ text-align:center; background:var(--ct-entry); border:1px solid var(--ct-border);
+  border-radius:14px; padding:1.2rem; box-shadow:0 10px 30px var(--ct-shadow); }
+.home-title{ margin:.1rem 0 .25rem; font-size:1.7rem; font-weight:900; color:var(--ct-text); }
+.home-sub{ margin:0 0 .8rem; color:var(--ct-muted); }
+.home-cta{ display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap; margin-bottom:.4rem; }
+
+/* Safety */
+.post-content section, .post-content section *{
+  opacity:1; mix-blend-mode:normal; filter:none; text-shadow:none;
+}
+
+
+/* ===== Fix: bottom info bars shouldn't truncate ===== */
+.ct-bars{
+  /* auto-fit cards and let them grow; wider min avoids cramped content */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.ct-bar{
+  /* two-column layout: label (fixed) + value (flex) */
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  align-items: start;
+  column-gap: .75rem;
+  min-height: unset;          /* allow tall cards when text wraps */
+}
+
+.ct-bar strong{
+  min-width: 6.75rem;         /* keeps labels aligned */
+  white-space: nowrap;
+}
+
+.ct-bar span{
+  /* stop ellipsis + allow clean wrapping */
+  white-space: normal;
+  overflow: visible;
+  text-overflow: initial;
+  color: var(--ct-text);
+  line-height: 1.35;
+}
+
+/* long links wrap nicely instead of breaking layout */
+.ct-bar a{
+  color: var(--ct-text);
+  font-weight: 800;
+  text-decoration: none;
+  overflow-wrap: anywhere;    /* modern */
+  word-break: break-word;     /* fallback */
+}
+.ct-bar a:hover{ text-decoration: underline; }

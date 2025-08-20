@@ -1,0 +1,139 @@
+/* ==========================================================================
+   Experience Timeline — PaperMod-native CSS
+   File: static/css/experience.css
+   - Uses theme variables: --content, --secondary, --border, --entry, --primary
+   - Works in light/dark/auto without overrides
+   ========================================================================== */
+
+/* Theme tokens with safe fallbacks */
+:root{
+  --exp-text:   var(--content, #111827);
+  --exp-muted:  var(--secondary, #6b7280);
+  --exp-border: var(--border, #e5e7eb);
+  --exp-card:   var(--entry, #ffffff);
+  --exp-shadow: rgba(0,0,0,.06);
+
+  /* Local accent (green timeline); tweak if you want another color */
+  --exp-accent: #16a34a;                 /* green-600 */
+  --exp-accent-rail: rgba(22,163,74,.35);
+  --exp-accent-ring: rgba(22,163,74,.18);
+}
+
+/* Slightly deeper shadow ring in dark to keep contrast */
+@media (prefers-color-scheme: dark){
+  :root{
+    --exp-shadow: rgba(0,0,0,.25);
+    --exp-accent-rail: rgba(22,163,74,.45);
+    --exp-accent-ring: rgba(22,163,74,.28);
+  }
+}
+
+/* -------- Layout: left rail + dot + card -------------------------------- */
+
+.exp-timeline{
+  position: relative;
+  margin-left: 1.75rem;                   /* space for rail/dots */
+}
+
+.exp-timeline::before{
+  content: "";
+  position: absolute;
+  left: 12px; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--exp-accent-rail);
+}
+
+.exp-item{
+  position: relative;
+  margin: 0 0 1.25rem 0;
+}
+
+/* The green dot */
+.exp-dot{
+  position: absolute;
+  left: 3px; top: 22px;                   /* aligns with first text line */
+  width: 18px; height: 18px;
+  border-radius: 9999px;
+  background: var(--exp-accent);
+  box-shadow: 0 0 0 4px var(--exp-accent-ring);
+}
+
+/* The card */
+.exp-card{
+  margin-left: 2.5rem;                    /* clears the dot */
+  background: var(--exp-card);
+  border: 1px solid var(--exp-border);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 2px 12px var(--exp-shadow);
+  transition: box-shadow .15s ease, transform .15s ease, background .15s ease;
+}
+
+.exp-card:hover{
+  box-shadow: 0 6px 20px var(--exp-shadow);
+  transform: translateY(-1px);
+}
+
+/* -------- Typography tokens --------------------------------------------- */
+
+.exp-range{
+  font-weight: 800;
+  color: var(--exp-accent);
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  font-size: .9rem;
+  margin: 0 0 .35rem 0;
+}
+
+.exp-role{
+  font-size: 1.05rem;
+  line-height: 1.25;
+  margin: 0 0 .15rem 0;
+  color: var(--exp-text);
+  font-weight: 800;
+}
+
+.exp-org{
+  font-weight: 700;
+  color: var(--exp-text);
+  margin: 0 0 .4rem 0;
+}
+
+.exp-desc{
+  margin: 0;
+  color: var(--exp-muted);
+  font-size: .95rem;
+}
+
+/* Lists inside the card (bullets for responsibilities) */
+.exp-card ul{
+  margin: .5rem 0 0;
+  padding-left: 1.15rem;
+  color: var(--exp-muted);
+}
+.exp-card li{ margin: .2rem 0; }
+
+/* Links inherit the card color (no jarring theme blues) */
+.exp-card a{
+  color: inherit;
+  text-decoration: none;
+}
+.exp-card a:hover{
+  text-decoration: underline;
+}
+
+/* -------- Responsive ----------------------------------------------------- */
+
+@media (max-width: 720px){
+  .exp-timeline{ margin-left: 1.4rem; }
+  .exp-timeline::before{ left: 10px; }
+  .exp-dot{ left: 1px; }
+  .exp-card{ margin-left: 2.2rem; }
+}
+
+/* -------- Safety: avoid extension-induced dimming ----------------------- */
+
+.post-content .exp-timeline,
+.post-content .exp-timeline *{
+  opacity: 1; mix-blend-mode: normal; filter: none; text-shadow: none;
+}

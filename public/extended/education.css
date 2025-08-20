@@ -1,0 +1,22 @@
+/* Education resume blocks */
+.edu-wrap { margin-top:.25rem; }
+.edu-row {
+  display:flex; gap:2rem; align-items:flex-start;
+  padding:1rem 0; border-bottom:1px solid #eaeaea;
+}
+.edu-left { display:flex; gap:.9rem; align-items:center; min-width:280px; }
+.edu-icon {
+  width:28px; height:28px; border-radius:9999px; display:grid; place-items:center;
+  font-size:14px; background:#0d6efd; color:#fff; box-shadow:0 2px 8px rgba(13,110,253,.25);
+  flex:0 0 28px;
+}
+.edu-degree { font-weight:700; line-height:1.25; }
+.edu-dates { color:#777; font-size:.9rem; margin-top:.15rem; }
+.edu-right .edu-uni { font-weight:800; }
+.edu-detail { color:#666; font-size:.95rem; margin-top:.2rem; }
+
+@media (max-width:720px){ .edu-row{flex-direction:column; gap:.5rem} .edu-left{min-width:auto} }
+@media (prefers-color-scheme:dark){
+  .edu-row{border-color:rgba(255,255,255,.15)}
+  .edu-dates,.edu-detail{color:rgba(255,255,255,.75)}
+}

@@ -1,0 +1,65 @@
+baseURL = "https://yourusername.github.io/"
+title = "S. K. M Shadekul Islam"
+theme = "PaperMod"
+languageCode = "en-us"
+[pagination]
+  pagerSize = 10
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+
+[params]
+  env = "production"
+  title = "S. K. M Shadekul Islam"
+  description = "Portfolio — GTA at DIU, ML Researcher, Writer"
+  showReadingTime = true
+  showPostNavLinks = true
+  showBreadCrumbs = true
+
+  [params.profileMode]
+    enabled = true
+    title = "S. K. M Shadekul Islam"
+    subtitle = "Graduate Teaching Assistant @ DIU | ML Researcher | Writer"
+    imageUrl = "images/me3 (2).jpg"
+    imageWidth = 160
+    imageHeight = 160
+
+
+
+# NAVBAR
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  name = "About Me"
+  identifier = "aboutme"
+  url = "/about/"
+  weight = 10
+
+[[menu.main]]
+  name = "Education"
+  parent = "aboutme"
+  url = "/about/education/"
+  weight = 11
+
+[[menu.main]]
+  name = "Experience"
+  parent = "aboutme"
+  url = "/about/experience/"
+  weight = 12
+
+[[menu.main]]
+  name = "Skills"
+  parent = "aboutme"
+  url = "/about/skills/"
+  weight = 13
+
+[[menu.main]]
+  name = "Contact"
+  url = "/contact/"
+  weight = 40

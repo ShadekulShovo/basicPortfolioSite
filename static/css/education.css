@@ -1,0 +1,94 @@
+/* ---------- Education blocks (PaperMod-native) ---------- */
+/* Colors read from PaperMod; fallbacks ensure safety if vars change */
+:root {
+  --edu-text: var(--content, #111827);
+  --edu-muted: var(--secondary, #6b7280);
+  --edu-border: var(--border, #e5e7eb);
+  --edu-hover: var(--entry, rgba(13,110,253,.05));
+  --edu-icon-bg: var(--primary, #0d6efd);
+  --edu-icon-fg: #ffffff;
+}
+
+/* Layout */
+.edu-wrap { margin-top: .25rem; }
+
+.edu-row {
+  display: grid;
+  grid-template-columns: minmax(320px, 1.25fr) 1fr;
+  column-gap: 2rem;
+  align-items: start;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid var(--edu-border);
+  border-radius: 12px;
+  transition: background .15s ease, box-shadow .15s ease;
+}
+.edu-row:last-child { border-bottom: none; }
+
+.edu-row:hover {
+  background: var(--edu-hover);
+  box-shadow: 0 2px 12px rgba(0,0,0,.04);
+}
+
+/* Left column (icon + text) */
+.edu-left {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  column-gap: .9rem;
+  align-items: start;
+}
+
+.edu-icon,
+.edu-icon-btn {
+  width: 28px; height: 28px; border-radius: 9999px;
+  display: grid; place-items: center;
+  font-size: 14px; font-weight: 700;
+  background: var(--edu-icon-bg);
+  color: var(--edu-icon-fg);
+  box-shadow: 0 2px 8px rgba(13,110,253,.25);
+  margin-top: .25rem;
+  user-select: none;
+}
+.edu-icon-btn { border: none; cursor: pointer; line-height: 1; }
+
+/* Text tokens (inherit theme colors) */
+.edu-degree { font-weight: 700; line-height: 1.25; font-size: 1.05rem; color: var(--edu-text); }
+.edu-uni    { font-weight: 800; color: var(--edu-text); }
+.edu-dates  { font-size: .92rem; margin-top: .2rem; color: var(--edu-muted); }
+.edu-detail { font-size: .95rem; margin-top: .25rem; color: var(--edu-muted); }
+
+/* Right column */
+.edu-right { align-self: start; }
+.edu-right .edu-detail { margin-top: .15rem; }
+
+/* Expandable block (if you kept the JS) */
+.edu-extra{
+  grid-column: 1 / -1;
+  margin-left: 3.1rem;
+  background: var(--edu-hover);
+  border-radius: 10px;
+  padding: .75rem 1rem;
+  font-size: .95rem; color: var(--edu-text);
+}
+
+/* Links inherit text color */
+.edu-row a { color: inherit; text-decoration: none; }
+.edu-row a:hover { text-decoration: underline; }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .edu-row { grid-template-columns: 1fr; row-gap: .4rem; }
+  .edu-right, .edu-extra { margin-left: 2.2rem; }
+}
+@media (max-width: 540px) {
+  .edu-left { grid-template-columns: 22px 1fr; column-gap: .7rem; }
+  .edu-icon, .edu-icon-btn { width: 22px; height: 22px; font-size: 12px; }
+}
+
+/* Safety: ensure no parent sets opacity/blend on this block */
+.post-content .edu-wrap,
+.post-content .edu-wrap * {
+  opacity: 1;
+  mix-blend-mode: normal;
+  text-shadow: none;
+  filter: none;
+}

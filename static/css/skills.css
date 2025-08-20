@@ -1,0 +1,152 @@
+/* ==========================================================================
+   Skills — “What I do” card + icon chips (PaperMod-native, CDN icons)
+   File: static/css/skills.css
+   ========================================================================== */
+
+/* Theme tokens with safe fallbacks */
+:root{
+  --sk-text:   var(--content, #111827);
+  --sk-muted:  var(--secondary, #6b7280);
+  --sk-border: var(--border, #e5e7eb);
+  --sk-card:   var(--entry, #ffffff);
+  --sk-primary: var(--primary, #0d6efd);
+
+  /* Icon gradient */
+  --sk-grad-1: #0ea5e9;   /* sky-500 */
+  --sk-grad-2: #22c55e;   /* green-500 */
+  --sk-grad-3: #a855f7;   /* purple-500 */
+}
+
+/* Wrapper */
+.skills-wrap{
+  display: grid;
+  gap: 1.25rem;
+}
+
+/* Card */
+.sk-card{
+  background: var(--sk-card);
+  border: 1px solid var(--sk-border);
+  border-radius: 14px;
+  padding: 1.25rem 1.25rem 1rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,.06);
+}
+
+/* Headline & sub */
+.sk-head{
+  margin: 0 0 .25rem 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--sk-text);
+  text-align: center;
+}
+.sk-sub{
+  margin: 0 auto 1rem;
+  max-width: 48rem;
+  color: var(--sk-muted);
+  text-align: center;
+  font-size: .98rem;
+}
+
+/* Category chip */
+.sk-cat{
+  margin: .6rem 0 .6rem;
+  font-size: .9rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-weight: 800;
+  color: var(--sk-text);
+  display: inline-block;
+  border-left: 4px solid var(--sk-primary);
+  padding-left: .5rem;
+}
+
+/* --------------------------------------------------------------------------
+   FIX: auto-fit columns with a sensible minimum so labels don't wrap
+   -------------------------------------------------------------------------- */
+.sk-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: .75rem;
+  margin-bottom: .35rem;
+}
+
+/* Each skill chip */
+.skill{
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .60rem .70rem;
+  border: 1px solid var(--sk-border);
+  border-radius: 12px;
+  background: var(--sk-card);
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  min-height: 58px;           /* consistent height */
+  min-width: 0;               /* allow label to shrink for ellipsis */
+  white-space: nowrap;        /* never wrap inside the chip */
+}
+.skill:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,.08);
+  border-color: color-mix(in srgb, var(--sk-primary) 40%, var(--sk-border));
+}
+
+/* Icon circle (supports <img> or text fallback) */
+.sk-icon{
+  width: 44px; height: 44px; border-radius: 9999px;
+  display: grid; place-items: center;
+  background: radial-gradient(120% 120% at 30% 30%, var(--sk-grad-1), var(--sk-grad-2), var(--sk-grad-3));
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.25), 0 2px 10px rgba(0,0,0,.12);
+  color: #fff;
+  font-weight: 800;
+  font-size: .9rem;
+  overflow: hidden;
+  flex: 0 0 44px;             /* don't let the icon shrink */
+}
+
+/* Text fallback via data-label */
+.sk-icon::before{ content: attr(data-label); }
+
+/* CDN icons are monochrome; make them white in the circle */
+.sk-icon img.si{
+  width: 70%; height: 70%;
+  object-fit: contain; display: block;
+  filter: brightness(0) invert(1); opacity: .95;
+}
+
+/* Label: never wrap; ellipsis if needed */
+.sk-label{
+  color: var(--sk-text);
+  font-weight: 700;
+  line-height: 1.1;
+  font-size: .95rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: keep-all;
+  hyphens: manual;            /* don't auto-hyphenate */
+  min-width: 0;               /* enable ellipsis */
+}
+
+/* Soft skills list */
+.soft-card{ padding-top: 1rem; }
+.soft-list{
+  list-style: none; margin: .25rem 0 0; padding: 0;
+  display: grid; gap: .45rem;
+}
+.soft-list li{
+  position: relative;
+  padding-left: 1.4rem;
+  color: var(--sk-text);
+}
+.soft-list li::before{
+  content: "✔";
+  position: absolute; left: 0; top: 0;
+  color: var(--sk-primary);
+  font-weight: 900;
+}
+
+/* Safety: readable even if extensions overlay styles */
+.post-content .skills-wrap, .post-content .skills-wrap *{
+  opacity: 1; mix-blend-mode: normal; filter: none; text-shadow: none;
+}
